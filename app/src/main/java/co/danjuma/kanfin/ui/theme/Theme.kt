@@ -1,5 +1,5 @@
 package co.danjuma.kanfin.ui.theme
-
+/*
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -68,3 +68,4 @@ fun KanFinTheme(
         content = content
     )
 }
+*/
