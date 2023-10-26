@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.danjuma.kanfin.components.NormalTextComponent
 import co.danjuma.kanfin.R
+import co.danjuma.kanfin.components.CheckBoxComponent
 import co.danjuma.kanfin.components.HeadingTextComponent
 import co.danjuma.kanfin.components.PasswordTextFieldComponent
 import co.danjuma.kanfin.components.TextFieldComponent
@@ -61,6 +62,8 @@ fun SignUpScreen() {
                 labelValue = stringResource(id = R.string.password),
                 painterResource = painterResource(id = R.drawable.password)
             )
+
+            CheckBoxComponent(value = stringResource(id = R.string.terms_and_conditions))
         }
     }
 }
