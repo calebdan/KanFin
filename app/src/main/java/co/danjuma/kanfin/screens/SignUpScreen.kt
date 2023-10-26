@@ -2,8 +2,11 @@ package co.danjuma.kanfin.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -16,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import co.danjuma.kanfin.components.NormalTextComponent
 import co.danjuma.kanfin.R
 import co.danjuma.kanfin.components.HeadingTextComponent
+import co.danjuma.kanfin.components.PasswordTextFieldComponent
 import co.danjuma.kanfin.components.TextFieldComponent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -28,12 +32,13 @@ fun SignUpScreen() {
             .background(Color.White)
             .padding(28.dp)
     ) {
-
         Column {
 
             NormalTextComponent(value = stringResource(id = R.string.hello))
 
             HeadingTextComponent(value = stringResource(id = R.string.create_account))
+
+            Spacer(modifier = Modifier.height(20.dp))
 
             TextFieldComponent(
                 labelValue = stringResource(id = R.string.first_name),
@@ -50,17 +55,16 @@ fun SignUpScreen() {
                 painterResource = painterResource(id = R.drawable.email)
             )
 
-            TextFieldComponent(
+
+
+            PasswordTextFieldComponent(
                 labelValue = stringResource(id = R.string.password),
                 painterResource = painterResource(id = R.drawable.password)
             )
-
         }
-
-
     }
-
 }
+
 
 @Preview
 @Composable
