@@ -183,22 +183,22 @@ fun CheckBoxComponent(value: String) {
 
         val checkedState = remember {
 
-            mutableStateOf(false)
+            mutableStateOf(true)
 
         }
 
         Checkbox(
             checked = checkedState.value,
-            onCheckedChange = { checkedState.value !=  checkedState.value })
-        
-        
-        ClickableTextComponent(value = value )
+            onCheckedChange = { checkedState.value != checkedState.value })
+
+
+        ClickableTextComponent(value = value)
 
     }
 }
 
 @Composable
-fun ClickableTextComponent(value: String){
+fun ClickableTextComponent(value: String) {
 
     val initialText = "By continuing, you accept our"
     val privacyPolicyText = " Privacy policy"
@@ -207,13 +207,13 @@ fun ClickableTextComponent(value: String){
 
     val annotatedString = buildAnnotatedString {
         append(initialText)
-        withStyle(style = SpanStyle(color = Primary)){
+        withStyle(style = SpanStyle(color = Primary)) {
             pushStringAnnotation(tag = privacyPolicyText, annotation = privacyPolicyText)
             append(privacyPolicyText)
         }
 
         append(andText)
-        withStyle(style = SpanStyle(color = Primary)){
+        withStyle(style = SpanStyle(color = Primary)) {
             pushStringAnnotation(tag = termsAndConditionsText, annotation = termsAndConditionsText)
             append(termsAndConditionsText)
         }
@@ -224,9 +224,13 @@ fun ClickableTextComponent(value: String){
         annotatedString.getStringAnnotations(offset, offset).firstOrNull()?.also { span ->
 
             Log.d("ClickableTextComponent", "{$span}")
+
+            if (span.item == termsAndConditionsText) {
+
+            }
         }
 
-    } )
+    })
 
 }
 
