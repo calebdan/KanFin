@@ -1,15 +1,22 @@
 package co.danjuma.kanfin.components
 
 import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.stringResource
@@ -40,6 +48,9 @@ import androidx.compose.ui.unit.sp
 import co.danjuma.kanfin.ui.theme.BgColor
 import co.danjuma.kanfin.ui.theme.Primary
 import co.danjuma.kanfin.R
+import co.danjuma.kanfin.ui.theme.GrayColor
+import co.danjuma.kanfin.ui.theme.Secondary
+import co.danjuma.kanfin.ui.theme.TextColor
 
 @Composable
 fun NormalTextComponent(value: String) {
@@ -100,8 +111,7 @@ fun TextFieldComponent(labelValue: String, painterResource: Painter) {
 
         leadingIcon = {
             Icon(
-                painter = painterResource,
-                contentDescription = ""
+                painter = painterResource, contentDescription = ""
             )
         })
 }
@@ -142,8 +152,7 @@ fun PasswordTextFieldComponent(labelValue: String, painterResource: Painter) {
 
         leadingIcon = {
             Icon(
-                painter = painterResource,
-                contentDescription = ""
+                painter = painterResource, contentDescription = ""
             )
         },
 
@@ -172,7 +181,7 @@ fun PasswordTextFieldComponent(labelValue: String, painterResource: Painter) {
 }
 
 @Composable
-fun CheckBoxComponent(value: String) {
+fun CheckBoxComponent(value: String, onTextSelected: (String) -> Unit) {
 
     Row(
         modifier = Modifier
@@ -187,18 +196,17 @@ fun CheckBoxComponent(value: String) {
 
         }
 
-        Checkbox(
-            checked = checkedState.value,
+        Checkbox(checked = checkedState.value,
             onCheckedChange = { checkedState.value != checkedState.value })
 
 
-        ClickableTextComponent(value = value)
+        ClickableTextComponent(value = value, onTextSelected)
 
     }
 }
 
 @Composable
-fun ClickableTextComponent(value: String) {
+fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
 
     val initialText = "By continuing, you accept our"
     val privacyPolicyText = " Privacy policy"
@@ -225,7 +233,9 @@ fun ClickableTextComponent(value: String) {
 
             Log.d("ClickableTextComponent", "{$span}")
 
-            if (span.item == termsAndConditionsText) {
+            if (span.item == termsAndConditionsText || (span.item == privacyPolicyText)) {
+
+                onTextSelected(span.item)
 
             }
         }
@@ -235,3 +245,59 @@ fun ClickableTextComponent(value: String) {
 }
 
 
+@Composable
+fun ButtonComponent(value: String) {
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(48.dp),
+        contentPadding = PaddingValues(),
+        colors = ButtonDefaults.buttonColors(Color.Transparent)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(48.dp)
+                .background(
+                    brush = Brush.horizontalGradient(listOf(Secondary, Primary)),
+                    shape = RoundedCornerShape(50.dp)
+                ),
+
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = value,
+                fontSize = 18.sp,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+
+@Composable
+fun DividerTextComponent() {
+    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+
+
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            color = GrayColor,
+            thickness = 1.dp
+        )
+
+        Text(text = " or ", fontSize = 18.sp, color = TextColor)
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            color = GrayColor,
+            thickness = 1.dp
+        )
+
+    }
+}

@@ -10,9 +10,9 @@ sealed class Screen {
 }
 
 
-sealed class KanFinAppRouter {
+object KanFinAppRouter {
 
-    private var currentScreen: MutableState<Screen> = mutableStateOf(Screen.SignUpScreen)
+    var currentScreen: MutableState<Screen> = mutableStateOf(Screen.SignUpScreen)
 
 
     fun navigateTo(destination: Screen){

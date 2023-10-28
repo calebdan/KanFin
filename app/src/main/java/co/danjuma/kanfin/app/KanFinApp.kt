@@ -1,11 +1,15 @@
 package co.danjuma.kanfin.app
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import co.danjuma.kanfin.navigation.KanFinAppRouter
+import co.danjuma.kanfin.navigation.Screen
 import co.danjuma.kanfin.screens.SignUpScreen
+import co.danjuma.kanfin.screens.TermsAndConditionsScreen
 
 @Composable
 fun KanFinApp() {
@@ -14,6 +18,21 @@ fun KanFinApp() {
         modifier = Modifier.fillMaxSize(),
         color = Color.White
     ) {
-        SignUpScreen()
+        Crossfade(targetState = KanFinAppRouter.currentScreen, label = "") { currentState ->
+            when(currentState.value){
+                is Screen.SignUpScreen -> {
+                    SignUpScreen()
+                }
+
+                is Screen.TermsAndConditionScreen -> {
+                    TermsAndConditionsScreen()
+                }
+            }
+            
+        }
+        
+        
+        
+
     }
 }
