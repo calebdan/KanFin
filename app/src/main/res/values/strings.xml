@@ -12,4 +12,5 @@
     <string name="terms_and_conditions">By continuing you accept our Privacy policy and Terms of use</string>
     <string name="terms_and_conditions_header">Terms and Conditions</string>
     <string name="register">Register</string>
+    <string name="or">" Or "</string>
 </resources>

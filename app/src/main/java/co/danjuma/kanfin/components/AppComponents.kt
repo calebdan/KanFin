@@ -51,6 +51,7 @@ import co.danjuma.kanfin.R
 import co.danjuma.kanfin.ui.theme.GrayColor
 import co.danjuma.kanfin.ui.theme.Secondary
 import co.danjuma.kanfin.ui.theme.TextColor
+import kotlin.math.log
 
 @Composable
 fun NormalTextComponent(value: String) {
@@ -236,12 +237,9 @@ fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
             if (span.item == termsAndConditionsText || (span.item == privacyPolicyText)) {
 
                 onTextSelected(span.item)
-
             }
         }
-
     })
-
 }
 
 
@@ -290,7 +288,7 @@ fun DividerTextComponent() {
             thickness = 1.dp
         )
 
-        Text(text = " or ", fontSize = 18.sp, color = TextColor)
+        Text(text = stringResource(id = R.string.or), fontSize = 18.sp, color = TextColor)
         Divider(
             modifier = Modifier
                 .fillMaxWidth()
@@ -299,5 +297,22 @@ fun DividerTextComponent() {
             thickness = 1.dp
         )
 
+    }
+}
+
+
+@Composable
+fun ClickableLoginTextComponent(onTextSelected: (String) -> Unit) {
+
+    val initialText = "Already have an account?"
+    val loginText = " Login"
+
+
+    val annotatedString = buildAnnotatedString {
+        append(initialText)
+        withStyle(style = SpanStyle(color = Primary)) {
+            pushStringAnnotation(tag = loginText, annotation = loginText)
+            append(loginText)
+        }
     }
 }
