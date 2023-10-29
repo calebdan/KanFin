@@ -55,7 +55,6 @@ internal fun SystemBackButtonHandler(
     CompositionLocalProvider(
         LocalBackPressedDispatcher provides LocalLifecycleOwner.current as ComponentActivity
     ) {
-
         ComposableHandler {
             onBackPressed()
         }

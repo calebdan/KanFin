@@ -76,7 +76,6 @@ fun LoginScreen() {
 
         }
 
-
         SystemBackButtonHandler {
             KanFinAppRouter.navigateTo(Screen.SignUpScreen)
         }
