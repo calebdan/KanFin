@@ -41,24 +41,25 @@ internal fun ComposableHandler(
         onDispose { handler.remove() }
     }
 
-    LaunchedEffect(enabled){
-        handler.isEnabled =enabled
-        handler.onBackPressed =onBackPressed
+    LaunchedEffect(enabled) {
+        handler.isEnabled = enabled
+        handler.onBackPressed = onBackPressed
     }
 }
-
-
-
-
 
 
 @Composable
 internal fun SystemBackButtonHandler(
     onBackPressed: () -> Unit
 ) {
-
-    CompositionLocalProvider {
+    CompositionLocalProvider(
         LocalBackPressedDispatcher provides LocalLifecycleOwner.current as ComponentActivity
-    }
+    ) {
 
+        ComposableHandler {
+            onBackPressed()
+        }
+    }
 }
+
+

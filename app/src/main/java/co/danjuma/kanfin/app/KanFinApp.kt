@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import co.danjuma.kanfin.navigation.KanFinAppRouter
 import co.danjuma.kanfin.navigation.Screen
+import co.danjuma.kanfin.screens.LoginScreen
 import co.danjuma.kanfin.screens.SignUpScreen
 import co.danjuma.kanfin.screens.TermsAndConditionsScreen
 
@@ -26,6 +27,10 @@ fun KanFinApp() {
 
                 is Screen.TermsAndConditionScreen -> {
                     TermsAndConditionsScreen()
+                }
+
+                is Screen.LoginScreen ->{
+                    LoginScreen()
                 }
             }
             

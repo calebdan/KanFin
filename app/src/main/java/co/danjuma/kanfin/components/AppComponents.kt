@@ -42,7 +42,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.danjuma.kanfin.ui.theme.BgColor
@@ -51,7 +53,7 @@ import co.danjuma.kanfin.R
 import co.danjuma.kanfin.ui.theme.GrayColor
 import co.danjuma.kanfin.ui.theme.Secondary
 import co.danjuma.kanfin.ui.theme.TextColor
-import kotlin.math.log
+
 
 @Composable
 fun NormalTextComponent(value: String) {
@@ -302,10 +304,14 @@ fun DividerTextComponent() {
 
 
 @Composable
-fun ClickableLoginTextComponent(onTextSelected: (String) -> Unit) {
+fun ClickableLoginTextComponent(
+    tryingToLogin: Boolean = true,
+    onTextSelected: (String) -> Unit,
+    fontSize: TextUnit
+) {
 
-    val initialText = "Already have an account?"
-    val loginText = " Login"
+    val initialText = if (tryingToLogin )"Already have an account?" else "Don't have an account yet? "
+    val loginText = if (tryingToLogin ) " Login" else "Register"
 
 
     val annotatedString = buildAnnotatedString {
@@ -315,4 +321,44 @@ fun ClickableLoginTextComponent(onTextSelected: (String) -> Unit) {
             append(loginText)
         }
     }
+
+    ClickableText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(40.dp), style = TextStyle(
+            fontSize = fontSize,
+            fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Normal,
+            textAlign = TextAlign.Center
+        ), text = annotatedString, onClick = { offset ->
+
+            annotatedString.getStringAnnotations(offset, offset)
+                .firstOrNull()?.also { span ->
+                    Log.d("ClickableTextComponent", "{${span.item}")
+
+                    if (span.item == loginText) {
+                        onTextSelected(span.item)
+                    }
+                }
+
+        })
+}
+
+
+@Composable
+fun UnderlinedTextComponent(value: String, fontSize: TextUnit) {
+    Text(
+        text = value, modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(40.dp), style = TextStyle(
+            fontSize = fontSize,
+            fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Normal
+        ),
+
+        color = Color.Gray,
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
+    )
+
 }
