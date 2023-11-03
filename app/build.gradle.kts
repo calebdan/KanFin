@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -49,6 +51,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -67,4 +70,5 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 }

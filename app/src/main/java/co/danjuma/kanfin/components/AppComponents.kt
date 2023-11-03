@@ -89,7 +89,7 @@ fun HeadingTextComponent(value: String) {
 
 @ExperimentalMaterial3Api
 @Composable
-fun TextFieldComponent(labelValue: String, painterResource: Painter) {
+fun TextFieldComponent(labelValue: String, painterResource: Painter, onTextSelected: (String) -> Unit) {
 
 
     val textValue = remember {
@@ -114,7 +114,9 @@ fun TextFieldComponent(labelValue: String, painterResource: Painter) {
         ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         singleLine = true,
-        onValueChange = { textValue.value = it },
+        onValueChange = {
+            textValue.value = it
+            onTextSelected(it)            },
         maxLines = 1,
 
         leadingIcon = {
@@ -127,7 +129,7 @@ fun TextFieldComponent(labelValue: String, painterResource: Painter) {
 
 @ExperimentalMaterial3Api
 @Composable
-fun PasswordTextFieldComponent(labelValue: String, painterResource: Painter) {
+fun PasswordTextFieldComponent(labelValue: String, painterResource: Painter, onTextSelected: (String) -> Unit) {
 
     val localFocusManager = LocalFocusManager.current
     val password = remember {
@@ -160,7 +162,8 @@ fun PasswordTextFieldComponent(labelValue: String, painterResource: Painter) {
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done
         ),
-        onValueChange = { password.value = it },
+        onValueChange = { password.value = it
+                        onTextSelected(it)},
         keyboardActions = KeyboardActions {
             localFocusManager.clearFocus()
         },
